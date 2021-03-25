@@ -11,7 +11,7 @@ namespace data_structs
                 Console.WriteLine("Menu of data structs");
                 Console.WriteLine("-------------------------");
                 Console.WriteLine("Escolha Uma opção abaxo:");
-                Console.Write("(1)Rubro Negra | (2)Fila Array | (3)Fila Lista | (4)Pilha Array | (5)Pilha Lista | (6)Deque \n");
+                Console.Write("(1)Rubro Negra | (2)Fila Array | (3)Fila Lista | (4)Pilha Array | (5)Pilha Lista | (6)Deque | (7)Fila com 2 pilhas | \n");
                 int op = int.Parse(Console.ReadLine());
                 Console.Clear();
 
@@ -102,6 +102,20 @@ namespace data_structs
 
                         Console.ReadKey();
                         Console.Clear();
+                        break;
+                    case 7:
+                        FilaDoublePilha doublePilha = new FilaDoublePilha(5);
+                        doublePilha.enqueue(5);
+                        doublePilha.enqueue(6);
+                        doublePilha.enqueue(10);
+                        doublePilha.denqueue();
+                        break;
+                    case 8:
+                        PilhaDoubleFila doubleFila = new PilhaDoubleFila(4);
+                        doubleFila.push(3);
+                        doubleFila.push(6);
+                        doubleFila.push(8);
+                        doubleFila.pop();
                         break;
                     default:
                         break;

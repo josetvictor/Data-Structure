@@ -26,7 +26,7 @@ namespace data_structs
         public object pop()
         {
             if (isEmpty()) throw new EPilhaVazia("A pilha está vazia");
-            tStack = - 1;
+            tStack =- 1;
             return array[tStack + 1];
         }
         public void push(object element)

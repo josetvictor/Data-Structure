@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace data_structs
+﻿namespace data_structs
 {
     class StackList
     {
