@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Diagnostics;
 
 namespace data_structs
@@ -7,120 +8,88 @@ namespace data_structs
     {
         static void Main(string[] args)
         {
-            while (true) {
-                Console.WriteLine("Menu of data structs");
-                Console.WriteLine("-------------------------");
-                Console.WriteLine("Escolha Uma opção abaxo:");
-                Console.Write("(1)Rubro Negra | (2)Fila Array | (3)Fila Lista | (4)Pilha Array | (5)Pilha Lista | (6)Deque | (7)Fila com 2 pilhas | \n");
-                int op = int.Parse(Console.ReadLine());
-                Console.Clear();
+            // instanciando a arvore e adicionando filhos
+            SimpleTree simples = new SimpleTree(1);
+            simples.addChild(simples.root(), 2);
+            simples.addChild(simples.root(), 3);
+            simples.addChild(simples.root(), 4);
+            simples.addChild(simples.root(), 5);
+            simples.addChild(simples.root(), 8);
 
-                switch (op)
+            Console.WriteLine("Tamanho da arvore \n");
+
+            Console.WriteLine(simples.size());
+
+            Console.ReadKey();
+            Console.Clear();
+
+            IEnumerator Filhos = simples.Nos();
+
+            Console.WriteLine("Lista de nodos da arvore \n");
+
+            NoTree nodo = null;
+
+            while (Filhos.MoveNext())
+            {
+                NoTree filho = (NoTree)Filhos.Current;
+                if((int)filho.element() == 5)
                 {
-                    case 1:
-                        RubroNegra minhaPia = new RubroNegra(5);
-                        minhaPia.push_black(5);
-                        minhaPia.push_black(7);
-                        minhaPia.push_red(23);
-                        minhaPia.push_red(2);
-                        minhaPia.push_red(4);
-                        Console.WriteLine("Size of stack black " + minhaPia.size_black());
-
-                        Console.ReadKey();
-                        Console.Clear();
-                        break;
-                    case 2:
-                        FilaArray minhaFia = new FilaArray(2);
-                        minhaFia.enqueue(5);
-                        minhaFia.enqueue(6);
-                        minhaFia.enqueue(10);
-                        Console.WriteLine("Teste de solidão " + minhaFia.isEmpty());
-                        Console.WriteLine("Tamanho " + minhaFia.size());
-                        Console.WriteLine("Peek " + minhaFia.top());
-
-                        Console.ReadKey();
-                        Console.Clear();
-                        break;
-                    case 3:
-                        FilaList minhaFiaL = new FilaList();
-                        minhaFiaL.enqueue(5);
-                        minhaFiaL.enqueue(6);
-                        minhaFiaL.enqueue(8);
-                        Console.WriteLine("Teste de solidão " + minhaFiaL.isEmpty());
-                        Console.WriteLine("Tamanho " + minhaFiaL.size());
-                        Console.WriteLine("Peek " + minhaFiaL.peek());
-
-                        Console.ReadKey();
-                        Console.Clear();
-                        break;
-                    case 4:
-                        Stopwatch tempoDuracao = new Stopwatch();
-
-                        Console.WriteLine("Escreva o valor de elementos para a pilha");
-                        int elementos = int.Parse(Console.ReadLine());
-
-                        StackArray Pilha1 = new StackArray(0, 10);
-                        StackArray Pilha2 = new StackArray(0, 100);
-                        StackArray Pilha3 = new StackArray(0, 1000);
-                        StackArray Pilha4 = new StackArray(1);
-
-                        tempoDuracao.Start();
-                        for (int i = 0; i <= elementos; i++)
-                        {
-                            Pilha4.push(i);
-                            Console.WriteLine("elemento na pilha " + i);
-                        }
-                        tempoDuracao.Stop();
-
-                        Console.WriteLine("tempo de duração " + tempoDuracao.ElapsedMilliseconds.ToString());
-                        Console.ReadKey();
-                        Console.Clear();
-                        break;
-                    case 5:
-                        StackList minhaPiaL = new StackList();
-                        minhaPiaL.push(5);
-                        minhaPiaL.push(6);
-                        minhaPiaL.push(8);
-                        Console.WriteLine("Teste de Solidão: " + minhaPiaL.isEmpty());
-                        Console.WriteLine("Tamanho: " + minhaPiaL.size());
-                        Console.WriteLine("Top: " + minhaPiaL.top());
-
-                        Console.ReadKey();
-                        Console.Clear();
-                        break;
-                    case 6:
-                        Deque meuBeq = new Deque();
-                        meuBeq.insertHeader(new DuploNo(5));
-                        meuBeq.insertHeader(new DuploNo(6));
-                        meuBeq.insertHeader(new DuploNo(8));
-                        meuBeq.insertTail(new DuploNo(10));
-                        meuBeq.insertTail(new DuploNo(23));
-                        Console.WriteLine("Teste de solidão " + meuBeq.isEmpty());
-                        Console.WriteLine("Tamanho " + meuBeq.lengthM());
-                        Console.WriteLine("Cabeça " + meuBeq.header());
-                        Console.WriteLine("Rabo " + meuBeq.tail());
-
-                        Console.ReadKey();
-                        Console.Clear();
-                        break;
-                    case 7:
-                        FilaDoublePilha doublePilha = new FilaDoublePilha(5);
-                        doublePilha.enqueue(5);
-                        doublePilha.enqueue(6);
-                        doublePilha.enqueue(10);
-                        doublePilha.denqueue();
-                        break;
-                    case 8:
-                        PilhaDoubleFila doubleFila = new PilhaDoubleFila(4);
-                        doubleFila.push(3);
-                        doubleFila.push(6);
-                        doubleFila.push(8);
-                        doubleFila.pop();
-                        break;
-                    default:
-                        break;
+                    nodo = filho;
                 }
+                Console.WriteLine(Filhos.Current);
             }
+
+            Console.ReadKey();
+            Console.Clear();
+
+            Filhos = simples.elements();
+            Console.WriteLine("Lista de elementos da arvore \n");
+            while (Filhos.MoveNext())
+            {
+                Console.WriteLine(Filhos.Current);
+            }
+
+            Console.ReadKey();
+            Console.Clear();
+
+            // buscando filhos e aplicando metodo de swap e replace
+
+            Console.WriteLine("metodo replace \n");
+            Console.WriteLine("root before replace " + simples.root().element());
+            simples.replace(simples.root(), 10);
+            Console.WriteLine("root after replace "+simples.root().element());
+
+
+            Console.ReadKey();
+            Console.Clear();
+
+            Console.WriteLine("Arvore antes do swap \n");
+
+            Filhos = simples.elements();
+
+            while (Filhos.MoveNext())
+            {
+                Console.WriteLine(Filhos.Current);
+            }
+
+            simples.swapElements(simples.root(), nodo);
+
+            Console.WriteLine("Arvore depois do swap \n");
+
+            Filhos = simples.elements();
+
+            while (Filhos.MoveNext())
+            {
+                Console.WriteLine(Filhos.Current);
+            }
+
+            Console.WriteLine("Veja que a posição 10 foi trocada pela posição 5");
+
+            Console.ReadKey();
+            Console.Clear();
+
+            
+
         }
     }
 }
