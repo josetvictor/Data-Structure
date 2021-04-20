@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Diagnostics;
+﻿using data_structs.Tabela_Hash;
+using System;
 
 namespace data_structs
 {
@@ -8,87 +7,37 @@ namespace data_structs
     {
         static void Main(string[] args)
         {
-            // instanciando a arvore e adicionando filhos
-            SimpleTree simples = new SimpleTree(1);
-            simples.addChild(simples.root(), 2);
-            simples.addChild(simples.root(), 3);
-            simples.addChild(simples.root(), 4);
-            simples.addChild(simples.root(), 5);
-            simples.addChild(simples.root(), 8);
+            TabelaHash tabela = new TabelaHash(13);
 
-            Console.WriteLine("Tamanho da arvore \n");
+            Console.WriteLine("Tamanho inicial da tabela: " + tabela.size());
 
-            Console.WriteLine(simples.size());
+            tabela.insertElement(18, "João");
+            tabela.insertElement(41, "Maria");
+            tabela.insertElement(22, "Lucas");
+            tabela.insertElement(44, "Johnny");
+            tabela.insertElement(59, "Dani");
+            tabela.insertElement(32, "Lina");
+            tabela.insertElement(31, "Coleguinha 1");
+            tabela.insertElement(72, "Coleguinha 2");
 
-            Console.ReadKey();
-            Console.Clear();
+            Console.WriteLine("Lista de keys da tabela: ");
+            Console.WriteLine(tabela.keys());
 
-            IEnumerator Filhos = simples.Nos();
+            Console.WriteLine("----------------------------------------------");
+            Console.WriteLine("Lista de elementos na tabela:");
+            tabela.elements();
+            Console.WriteLine("----------------------------------------------");
 
-            Console.WriteLine("Lista de nodos da arvore \n");
+            // Removendo 2 coleguinhas
+            tabela.removeElement(31);
+            tabela.removeElement(72);
 
-            NoTree nodo = null;
-
-            while (Filhos.MoveNext())
-            {
-                NoTree filho = (NoTree)Filhos.Current;
-                if((int)filho.element() == 5)
-                {
-                    nodo = filho;
-                }
-                Console.WriteLine(Filhos.Current);
-            }
-
-            Console.ReadKey();
-            Console.Clear();
-
-            Filhos = simples.elements();
-            Console.WriteLine("Lista de elementos da arvore \n");
-            while (Filhos.MoveNext())
-            {
-                Console.WriteLine(Filhos.Current);
-            }
-
-            Console.ReadKey();
-            Console.Clear();
-
-            // buscando filhos e aplicando metodo de swap e replace
-
-            Console.WriteLine("metodo replace \n");
-            Console.WriteLine("root before replace " + simples.root().element());
-            simples.replace(simples.root(), 10);
-            Console.WriteLine("root after replace "+simples.root().element());
+            Console.WriteLine("Lista de elementos na depois da remoção:");
+            tabela.elements();
+            Console.WriteLine("----------------------------------------------");
 
 
-            Console.ReadKey();
-            Console.Clear();
-
-            Console.WriteLine("Arvore antes do swap \n");
-
-            Filhos = simples.elements();
-
-            while (Filhos.MoveNext())
-            {
-                Console.WriteLine(Filhos.Current);
-            }
-
-            simples.swapElements(simples.root(), nodo);
-
-            Console.WriteLine("Arvore depois do swap \n");
-
-            Filhos = simples.elements();
-
-            while (Filhos.MoveNext())
-            {
-                Console.WriteLine(Filhos.Current);
-            }
-
-            Console.WriteLine("Veja que a posição 10 foi trocada pela posição 5");
-
-            Console.ReadKey();
-            Console.Clear();
-
-            
+            Console.WriteLine("Tamanho depois de atengir sua capacidade de 50% da tabela: " + tabela.size());
 
         }
     }
