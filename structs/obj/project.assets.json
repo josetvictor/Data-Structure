@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jose\\Documents\\Dev\\data-structure-CSharp\\structs\\data-structs.csproj",
-      "projectName": "data-structs",
-      "projectPath": "C:\\Users\\Jose\\Documents\\Dev\\data-structure-CSharp\\structs\\data-structs.csproj",
+      "projectUniqueName": "C:\\Users\\Jose\\Documents\\Dev\\data-structure-CSharp\\structs\\structs.csproj",
+      "projectName": "structs",
+      "projectPath": "C:\\Users\\Jose\\Documents\\Dev\\data-structure-CSharp\\structs\\structs.csproj",
       "packagesPath": "C:\\Users\\Jose\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Jose\\Documents\\Dev\\data-structure-CSharp\\structs\\obj\\",
       "projectStyle": "PackageReference",

@@ -1,4 +1,5 @@
-﻿using data_structs.Tabela_Hash;
+﻿using data_structs.Arvore;
+using data_structs.Node;
 using System;
 
 namespace data_structs
@@ -7,38 +8,36 @@ namespace data_structs
     {
         static void Main(string[] args)
         {
-            TabelaHash tabela = new TabelaHash(13);
+            NoBinary root = new NoBinary(null, 10);
+            SearchBinaryTree searchTree = new SearchBinaryTree(root);
 
-            Console.WriteLine("Tamanho inicial da tabela: " + tabela.size());
+            while (true)
+            {
+                Console.WriteLine("Escolha uma ação");
+                Console.WriteLine("Digite 1 para inserir / Digite 2 para remover");
+                int choice = int.Parse(Console.ReadLine());
+                if (choice == 1)
+                {
+                    Console.WriteLine("Insira um novo valor na arvore!");
+                    int value = int.Parse(Console.ReadLine());
+                    searchTree.insert(root, value);
 
-            tabela.insertElement(18, "João");
-            tabela.insertElement(41, "Maria");
-            tabela.insertElement(22, "Lucas");
-            tabela.insertElement(44, "Johnny");
-            tabela.insertElement(59, "Dani");
-            tabela.insertElement(32, "Lina");
-            tabela.insertElement(31, "Coleguinha 1");
-            tabela.insertElement(72, "Coleguinha 2");
+                    Console.Clear();
+                } else if(choice == 2)
+                {
+                    Console.WriteLine("Insira o elemento que você quer remover da arvore!");
+                    int value = int.Parse(Console.ReadLine());
+                    searchTree.remove(searchTree.search(root, value), value);
 
-            Console.WriteLine("Lista de keys da tabela: ");
-            Console.WriteLine(tabela.keys());
+                    Console.Clear();
+                }
+                
+                searchTree.showTree(searchTree.getRoot());
 
-            Console.WriteLine("----------------------------------------------");
-            Console.WriteLine("Lista de elementos na tabela:");
-            tabela.elements();
-            Console.WriteLine("----------------------------------------------");
+                Console.ReadKey();
 
-            // Removendo 2 coleguinhas
-            tabela.removeElement(31);
-            tabela.removeElement(72);
-
-            Console.WriteLine("Lista de elementos na depois da remoção:");
-            tabela.elements();
-            Console.WriteLine("----------------------------------------------");
-
-
-            Console.WriteLine("Tamanho depois de atengir sua capacidade de 50% da tabela: " + tabela.size());
-
+                Console.Clear();
+            }
         }
     }
 }

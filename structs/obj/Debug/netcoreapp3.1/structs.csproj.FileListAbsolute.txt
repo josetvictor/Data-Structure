@@ -1,0 +1,13 @@
+C:\Users\Jose\Documents\Dev\data-structure-CSharp\structs\bin\Debug\netcoreapp3.1\structs.exe
+C:\Users\Jose\Documents\Dev\data-structure-CSharp\structs\bin\Debug\netcoreapp3.1\structs.deps.json
+C:\Users\Jose\Documents\Dev\data-structure-CSharp\structs\bin\Debug\netcoreapp3.1\structs.runtimeconfig.json
+C:\Users\Jose\Documents\Dev\data-structure-CSharp\structs\bin\Debug\netcoreapp3.1\structs.runtimeconfig.dev.json
+C:\Users\Jose\Documents\Dev\data-structure-CSharp\structs\bin\Debug\netcoreapp3.1\structs.dll
+C:\Users\Jose\Documents\Dev\data-structure-CSharp\structs\bin\Debug\netcoreapp3.1\structs.pdb
+C:\Users\Jose\Documents\Dev\data-structure-CSharp\structs\obj\Debug\netcoreapp3.1\structs.csproj.AssemblyReference.cache
+C:\Users\Jose\Documents\Dev\data-structure-CSharp\structs\obj\Debug\netcoreapp3.1\structs.AssemblyInfoInputs.cache
+C:\Users\Jose\Documents\Dev\data-structure-CSharp\structs\obj\Debug\netcoreapp3.1\structs.AssemblyInfo.cs
+C:\Users\Jose\Documents\Dev\data-structure-CSharp\structs\obj\Debug\netcoreapp3.1\structs.csproj.CoreCompileInputs.cache
+C:\Users\Jose\Documents\Dev\data-structure-CSharp\structs\obj\Debug\netcoreapp3.1\structs.dll
+C:\Users\Jose\Documents\Dev\data-structure-CSharp\structs\obj\Debug\netcoreapp3.1\structs.pdb
+C:\Users\Jose\Documents\Dev\data-structure-CSharp\structs\obj\Debug\netcoreapp3.1\structs.genruntimeconfig.cache

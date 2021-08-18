@@ -1,6 +1,6 @@
+using data_structs.Node;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 
 namespace data_structs{
     public class SimpleTree {
