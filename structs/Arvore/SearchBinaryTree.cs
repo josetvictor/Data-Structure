@@ -1,31 +1,30 @@
 ﻿using data_structs.Node;
 using System;
+using System.Collections.Generic;
 
 namespace data_structs.Arvore
 {
     class SearchBinaryTree
     {
         NoBinary root;
-        int lenght;
+        int lenght = 0;
         public SearchBinaryTree(NoBinary root)
         {
             this.root = root;
-            lenght = 1;
+            lenght = lenght + 1;
         }
         #region Metodos genericos
         public int size() => lenght;
         public int height(NoBinary node)
         {
-            if (isExternal(node))
+            if (node == null || (node.getChildLeft() == null && node.getChildRight() == null))
                 return 0;
             else
             {
-                int altura = 0;
-                while (node.getChildLeft() != null || node.getChildRight() != null)
-                {
-                    altura = Math.Max(altura, height(root));
-                }
-                return altura + 1;
+                if (height(node.getChildLeft()) > height(node.getChildRight()))
+                    return 1 + height(node.getChildLeft());
+                else 
+                    return 1 + height(node.getChildRight());
             }
         }
         public bool isEmpty() => lenght == 0;
@@ -68,48 +67,93 @@ namespace data_structs.Arvore
                 if (value > subTree.getElement())
                 {
                     if (subTree.getChildRight() == null)
+                    {
                         subTree.setChildRight(new NoBinary(subTree, value));
-                    else insert(subTree.getChildRight(), value);
+                        lenght++;
+                    }
+                    else
+                        insert(subTree.getChildRight(), value);
                 }
                 else
                 {
                     if (subTree.getChildLeft() == null)
+                    {
                         subTree.setChildLeft(new NoBinary(subTree, value));
+                        lenght++;
+                    }
                     else insert(subTree.getChildLeft(), value);
                 }
             }
         }
 
-        public void remove(NoBinary node, int value)
+        //public void remove(NoBinary node, int value)
+        //{
+        //    //NoBinary deletedNode = search(root, value);
+        //    // Se não tiver filhos
+        //    if (isExternal(node))
+        //    {
+        //        NoBinary dad = node.getParent();
+        //        if (dad.getChildLeft() == node) dad.setChildLeft(null);
+        //        else dad.setChildRight(null);
+        //        cleaNode(node);
+        //    }
+        //    // se tiver um filho
+        //    else if (node.getChildLeft() == null || node.getChildRight() == null)
+        //    {
+        //        NoBinary dad = node.getParent();
+
+        //        if (dad.getChildLeft() == null)
+        //            dad.setChildRight(node.getChildRight());
+        //        else
+        //            dad.setChildLeft(node.getChildLeft());
+
+        //        cleaNode(node);
+
+        //    }
+        //    // se tiver dois filhos
+        //    else if (node.getChildLeft() != null && node.getChildRight() != null)
+        //    {
+        //        NoBinary aux = node.getChildRight().minNode();
+        //        node.setElement(aux.getElement());
+        //        remove(node.getChildRight(), node.getElement());
+        //    }
+        //}
+
+        public NoBinary removeNode(NoBinary node, int value)
         {
-            //NoBinary deletedNode = search(root, value);
-            // Se não tiver filhos
-            if (isExternal(node))
-            {
-                NoBinary dad = node.getParent();
-                if (dad.getChildLeft() == node) dad.setChildLeft(null);
-                else dad.setChildRight(null);
-                cleaNode(node);
-            }
-            // se tiver um filho
-            else if (node.getChildLeft() == null || node.getChildRight() == null)
-            {
-                NoBinary dad = node.getParent();
+            if (node == null) return null;
 
-                if (dad.getChildLeft() == null)
-                    dad.setChildRight(node.getChildRight());
-                else
-                    dad.setChildLeft(node.getChildLeft());
-
-                cleaNode(node);
-
-            }
-            // se tiver dois filhos
-            else if (node.getChildLeft() != null && node.getChildRight() != null)
+            if(value < node.getElement())
             {
+                node.setChildLeft(removeNode(node.getChildLeft(), value));
+                return node;
+            } else if (value > node.getElement())
+            {
+                node.setChildRight(removeNode(node.getChildRight(), value));
+                return node;
+            } else
+            {
+                // caso 1
+                if(node.getChildLeft() == null && node.getChildRight() == null)
+                {
+                    node = null;
+                    return node;
+                }
+                // caso 2
+                if(node.getChildLeft() == null)
+                {
+                    node = node.getChildRight();
+                    return node;
+                } else if(node.getChildRight() == null)
+                {
+                    node = node.getChildLeft();
+                    return node;
+                }
+                //caso 3
                 NoBinary aux = node.getChildRight().minNode();
                 node.setElement(aux.getElement());
-                remove(node.getChildRight(), node.getElement());
+                node.setChildRight(removeNode(node.getChildRight(), value));
+                return node;
             }
         }
 
@@ -130,7 +174,7 @@ namespace data_structs.Arvore
         public bool isRoot(NoBinary node) => node == root;
         public int depth(NoBinary node)
         {
-            if (node == root)
+            if (node == null || node == root)
             {
                 return 0;
             }
@@ -140,24 +184,52 @@ namespace data_structs.Arvore
             }
         }
 
-        public void showTree(NoBinary tree)
+        public void treeInOrder(NoBinary tree, List<NoBinary> values)
         {
             if(tree != null)
             {
-                showTree(tree.getChildLeft());
-
-                if(tree == root)
-                {
-                    Console.WriteLine(tree.getElement() + " ");
-                } else
-                {
-                    Console.WriteLine("---" + tree.getElement() + " ");
-                }
-
-
-                showTree(tree.getChildRight());
+                treeInOrder(tree.getChildLeft(), values);
+                values.Add(tree);
+                Console.Write(" "+tree.getElement()+" " + "h " + tree.fb);
+                treeInOrder(tree.getChildRight(), values);
             }
-            
+        }
+
+        public void showTree(NoBinary node)
+        {
+            int line = height(node);
+            int column = lenght;
+            NoBinary[,] treeSchema = new NoBinary[line + 1, column];
+            List<NoBinary> trees = new List<NoBinary>();
+
+            treeInOrder(root, trees);
+            Console.WriteLine("");
+
+            for (int i = 0; i < column; i++)
+            {
+                NoBinary valor = trees[i];
+                treeSchema[height(valor), i] = valor;
+            }
+
+            for (int i = 0; i < line; i++)
+            {
+                Console.WriteLine("");
+                for (int j = 0; j < column; j++)
+                {
+                    if(treeSchema[i,j] == null)
+                    {
+                        Console.Write("       ");
+                    } else if( treeSchema[i,j].getElement() > (trees.Count / 2))
+                    {
+                        Console.Write(treeSchema[i,j].getElement() + "h " + treeSchema[i,j].fb);
+                    } else
+                    {
+                        Console.Write("       " + treeSchema[i,j].getElement() + "h " + treeSchema[i, j].fb);
+                    }
+                }
+                Console.WriteLine("");
+            }
+
         }
         #endregion
     }

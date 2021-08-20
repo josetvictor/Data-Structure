@@ -7,6 +7,7 @@ namespace data_structs.Node
     public class NoBinary
     {
         private int element;
+        public int fb;
         private NoBinary dad;
         private NoBinary left;
         private NoBinary right;
