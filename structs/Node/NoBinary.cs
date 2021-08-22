@@ -7,7 +7,7 @@ namespace data_structs.Node
     public class NoBinary
     {
         private int element;
-        public int fb;
+        private int balanceFactor;
         private NoBinary dad;
         private NoBinary left;
         private NoBinary right;
@@ -28,25 +28,25 @@ namespace data_structs.Node
             right = null;
         }
 
-        public int getElement() => element;
+        public int Element() => element;
 
         public void setElement(int element) => this.element = element;
 
-        public NoBinary getParent() => dad;
+        public NoBinary Parent() => dad;
 
         public void setParent(NoBinary node) => dad = node;
 
-        public NoBinary getChildLeft() => left;
+        public NoBinary Left() => left;
 
-        public void setChildLeft(NoBinary node) => left = node;
+        public void setLeft(NoBinary node) => left = node;
 
-        public void removeChildLeft() => left = null;
+        public void removeLeft() => left = null;
 
-        public NoBinary getChildRight() => right;
+        public NoBinary Right() => right;
 
-        public void setChildRight(NoBinary node) => right = node;
+        public void setRight(NoBinary node) => right = node;
 
-        public void removeChildRight() => right = null;
+        public void removeRight() => right = null;
 
         public int childrenNumber()
         {
@@ -65,17 +65,6 @@ namespace data_structs.Node
             if (right!= null) list.Add(right);
 
             yield return list.ToArray().GetEnumerator();
-        }
-
-        public NoBinary minNode()
-        {
-            NoBinary current = this;
-            while (current != null && current.getChildLeft() != null)
-            {
-                current = current.getChildLeft();
-            }
-
-            return current;
         }
     }
 }

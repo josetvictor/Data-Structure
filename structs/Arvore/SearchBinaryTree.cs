@@ -11,225 +11,155 @@ namespace data_structs.Arvore
         public SearchBinaryTree(NoBinary root)
         {
             this.root = root;
-            lenght = lenght + 1;
+            lenght++;
         }
         #region Metodos genericos
         public int size() => lenght;
         public int height(NoBinary node)
         {
-            if (node == null || (node.getChildLeft() == null && node.getChildRight() == null))
+            if (node == null || (node.Left() == null && node.Right() == null))
                 return 0;
             else
             {
-                if (height(node.getChildLeft()) > height(node.getChildRight()))
-                    return 1 + height(node.getChildLeft());
+                if (height(node.Left()) > height(node.Right()))
+                    return 1 + height(node.Left());
                 else 
-                    return 1 + height(node.getChildRight());
+                    return 1 + height(node.Right());
             }
         }
+
         public bool isEmpty() => lenght == 0;
         #endregion
 
         #region Metodos de acesso
         public NoBinary getRoot() => root;
-        public NoBinary parent(NoBinary node) => node.getParent();
-        public NoBinary leftChild(NoBinary node) => node.getChildLeft();
-        public NoBinary rightChild(NoBinary node) => node.getChildRight();
-        public bool hasLeft(NoBinary node) => node.getChildLeft() != null;
+        public NoBinary parent(NoBinary node) => node.Parent();
+        public NoBinary leftChild(NoBinary node) => node.Left();
+        public NoBinary rightChild(NoBinary node) => node.Right();
 
-        public bool hasRight(NoBinary node) => node.getChildLeft() != null;
+        public bool hasLeft(NoBinary node) => node.Left() != null;
+        public bool hasRight(NoBinary node) => node.Left() != null;
         #endregion
 
         #region Metodo de atualização
-        public int replace(NoBinary node, int objeto)
+        public int replace(NoBinary node, int value)
         {
-            node.setElement(objeto);
-            return node.getElement();
+            node.setElement(value);
+            return node.Element();
         }
         #endregion
 
         #region Metodos adicionais
         public NoBinary search(NoBinary tree, int value)
         {
-            if (tree.getElement() == value)
+            if (tree.Element() == value)
                 return tree;
-            if (value < tree.getElement())
-                return search(tree.getChildLeft(), value);
+            if (value < tree.Element())
+                return search(tree.Left(), value);
 
-            return search(tree.getChildRight(), value);
+            return search(tree.Right(), value);
         }
-
         
         public void insert(NoBinary subTree, int value)
         {
             if(subTree != null)
             {
-                if (value > subTree.getElement())
+                if (value > subTree.Element())
                 {
-                    if (subTree.getChildRight() == null)
+                    if (subTree.Right() == null)
                     {
-                        subTree.setChildRight(new NoBinary(subTree, value));
+                        subTree.setRight(new NoBinary(subTree, value));
                         lenght++;
                     }
                     else
-                        insert(subTree.getChildRight(), value);
+                        insert(subTree.Right(), value);
                 }
                 else
                 {
-                    if (subTree.getChildLeft() == null)
+                    if (subTree.Left() == null)
                     {
-                        subTree.setChildLeft(new NoBinary(subTree, value));
+                        subTree.setLeft(new NoBinary(subTree, value));
                         lenght++;
                     }
-                    else insert(subTree.getChildLeft(), value);
+                    else insert(subTree.Left(), value);
                 }
             }
         }
 
-        //public void remove(NoBinary node, int value)
-        //{
-        //    //NoBinary deletedNode = search(root, value);
-        //    // Se não tiver filhos
-        //    if (isExternal(node))
-        //    {
-        //        NoBinary dad = node.getParent();
-        //        if (dad.getChildLeft() == node) dad.setChildLeft(null);
-        //        else dad.setChildRight(null);
-        //        cleaNode(node);
-        //    }
-        //    // se tiver um filho
-        //    else if (node.getChildLeft() == null || node.getChildRight() == null)
-        //    {
-        //        NoBinary dad = node.getParent();
-
-        //        if (dad.getChildLeft() == null)
-        //            dad.setChildRight(node.getChildRight());
-        //        else
-        //            dad.setChildLeft(node.getChildLeft());
-
-        //        cleaNode(node);
-
-        //    }
-        //    // se tiver dois filhos
-        //    else if (node.getChildLeft() != null && node.getChildRight() != null)
-        //    {
-        //        NoBinary aux = node.getChildRight().minNode();
-        //        node.setElement(aux.getElement());
-        //        remove(node.getChildRight(), node.getElement());
-        //    }
-        //}
-
-        public NoBinary removeNode(NoBinary node, int value)
+        public void remove(NoBinary node)
         {
-            if (node == null) return null;
-
-            if(value < node.getElement())
+            // Se não tiver filhos
+            if (isExternal(node))
             {
-                node.setChildLeft(removeNode(node.getChildLeft(), value));
-                return node;
-            } else if (value > node.getElement())
-            {
-                node.setChildRight(removeNode(node.getChildRight(), value));
-                return node;
-            } else
-            {
-                // caso 1
-                if(node.getChildLeft() == null && node.getChildRight() == null)
-                {
-                    node = null;
-                    return node;
-                }
-                // caso 2
-                if(node.getChildLeft() == null)
-                {
-                    node = node.getChildRight();
-                    return node;
-                } else if(node.getChildRight() == null)
-                {
-                    node = node.getChildLeft();
-                    return node;
-                }
-                //caso 3
-                NoBinary aux = node.getChildRight().minNode();
-                node.setElement(aux.getElement());
-                node.setChildRight(removeNode(node.getChildRight(), value));
-                return node;
+                NoBinary dad = node.Parent();
+                if (dad.Left() == node) dad.setLeft(null);
+                else dad.setRight(null);
+                cleaNode(node);
             }
+            // se tiver um filho
+            else if (isInternal(node))
+            {
+                NoBinary dad = node.Parent();
+                if (dad.Left() == null)
+                    dad.setRight(node.Right());
+                else
+                    dad.setLeft(node.Left());
+
+                cleaNode(node);
+            }
+            // se tiver dois filhos
+            else if (node.Left() != null && node.Right() != null)
+            {
+                NoBinary aux = minNode(node.Right());
+                node.setElement(aux.Element());
+                remove(aux);
+            }
+        }
+
+        public NoBinary minNode(NoBinary node)
+        {
+            NoBinary current = node;
+
+            while(current != null && current.Left() != null)
+            {
+                current = current.Left();
+            }
+
+            return current;
         }
 
         public void cleaNode(NoBinary node)
         {
             node.setParent(null);
-            node.setChildLeft(null);
-            node.setChildRight(null);
+            node.setLeft(null);
+            node.setRight(null);
         }
         #endregion
 
         #region Metodos de consulta
-        public bool isInternal(NoBinary node) => node.getChildLeft() == null ||
-        node.getChildRight() == null;
+        public bool isInternal(NoBinary node) => node.Left() == null || node.Right() == null;
 
-        public bool isExternal(NoBinary node) => node.getChildLeft() == null &&
-        node.getChildRight() == null;
+        public bool isExternal(NoBinary node) => node.Left() == null && node.Right() == null;
         public bool isRoot(NoBinary node) => node == root;
+
         public int depth(NoBinary node)
         {
             if (node == null || node == root)
-            {
                 return 0;
+            else
+                return (1 + depth(node.Parent()));
+        }
+
+        public void showTree(NoBinary tree)
+        {
+            if (tree != null)
+            {
+                Console.Write(tree.Element());
+                showTree(tree.Left());
+                showTree(tree.Right());
             }
             else
-            {
-                return (1 + depth(node.getParent()));
-            }
-        }
-
-        public void treeInOrder(NoBinary tree, List<NoBinary> values)
-        {
-            if(tree != null)
-            {
-                treeInOrder(tree.getChildLeft(), values);
-                values.Add(tree);
-                Console.Write(" "+tree.getElement()+" " + "h " + tree.fb);
-                treeInOrder(tree.getChildRight(), values);
-            }
-        }
-
-        public void showTree(NoBinary node)
-        {
-            int line = height(node);
-            int column = lenght;
-            NoBinary[,] treeSchema = new NoBinary[line + 1, column];
-            List<NoBinary> trees = new List<NoBinary>();
-
-            treeInOrder(root, trees);
-            Console.WriteLine("");
-
-            for (int i = 0; i < column; i++)
-            {
-                NoBinary valor = trees[i];
-                treeSchema[height(valor), i] = valor;
-            }
-
-            for (int i = 0; i < line; i++)
-            {
-                Console.WriteLine("");
-                for (int j = 0; j < column; j++)
-                {
-                    if(treeSchema[i,j] == null)
-                    {
-                        Console.Write("       ");
-                    } else if( treeSchema[i,j].getElement() > (trees.Count / 2))
-                    {
-                        Console.Write(treeSchema[i,j].getElement() + "h " + treeSchema[i,j].fb);
-                    } else
-                    {
-                        Console.Write("       " + treeSchema[i,j].getElement() + "h " + treeSchema[i, j].fb);
-                    }
-                }
-                Console.WriteLine("");
-            }
-
+                Console.Write(" ");
         }
         #endregion
     }
