@@ -66,5 +66,24 @@ namespace data_structs.Node
 
             yield return list.ToArray().GetEnumerator();
         }
+
+        public ArrayList nodeElements(ArrayList nodes, NoBinary no)
+        {
+            NoBinary leftSon = no.left;
+            NoBinary rightSon = no.right;
+
+            if(no != null)
+            {
+                if(leftSon != null)
+                    nodeElements(nodes, leftSon);
+
+                nodes.Add(no);
+
+                if(rightSon != null)
+                    nodeElements(nodes, rightSon);
+            }
+
+            return nodes;
+        }
     }
 }

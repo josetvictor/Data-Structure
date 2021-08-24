@@ -54,47 +54,30 @@ namespace data_structs.Arvore
             // Percorre a arvore e insere o nó como na BST
             insert(node, value);
             // balanceia a árvore se for necessário
-            if (balanceFactor(node) == 2)
-            {
-                if (value < node.Left().Element())
-                {
-                    rotationSL(node);
-                }
-                else
-                {
-                    doubleRotationLR(node);
-                }
-            }
-            if (balanceFactor(node) == -2)
-            {
-                if (value > node.Right().Element())
-                {
-                    rotationSR(node);
-                }
-                else
-                {
-                    doubleRotationRL(node);
-                }
-            }
+            passinhoDoVolante(root);
         }
 
-        public NoBinary removeAVL(NoBinary node, int value)
+        public void removeAVL(int value)
         {
             // Busca o nó que vai ser deletado
-            var deleted = search(node, value);
+            var deleted = search(root, value);
             // Deleta o nó encontrado
             remove(deleted);
             // Balancia a arvore se for necessário
+            passinhoDoVolante(root);
+        }
+
+        public void passinhoDoVolante(NoBinary node) {
             if (balanceFactor(node) == 2)
             {
                 int balanceFactorLeft = balanceFactor(node.Left());
                 if (balanceFactorLeft == 0 || balanceFactorLeft == 1)
                 {
-                    return rotationSL(node);
+                    rotationSL(node);
                 }
                 if (balanceFactorLeft == -1)
                 {
-                    return doubleRotationLR(node.Left());
+                    doubleRotationLR(node.Left());
                 }
             }
             if (balanceFactor(node) == -2)
@@ -102,15 +85,13 @@ namespace data_structs.Arvore
                 int balanceFactorRight = balanceFactor(node.Right());
                 if (balanceFactorRight == 0 || balanceFactorRight == -1)
                 {
-                    return rotationSR(node);
+                    rotationSR(node);
                 }
                 if (balanceFactorRight == 1)
                 {
-                    return doubleRotationRL(node.Right());
+                    doubleRotationRL(node.Right());
                 }
             }
-
-            return node;
         }
 
     }

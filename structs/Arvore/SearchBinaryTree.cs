@@ -1,5 +1,6 @@
 ﻿using data_structs.Node;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace data_structs.Arvore
@@ -152,14 +153,38 @@ namespace data_structs.Arvore
 
         public void showTree(NoBinary tree)
         {
-            if (tree != null)
+            int rows = height(tree);
+            int columns = lenght;
+
+            NoBinary[,] matrizTree = new NoBinary[rows + 1, columns];
+            ArrayList nodes = new ArrayList();
+
+            nodes = tree.nodeElements(nodes, tree);
+
+            nodes.ToArray();
+            for(int i = 0; i < columns; i++)
             {
-                Console.Write(tree.Element());
-                showTree(tree.Left());
-                showTree(tree.Right());
+                NoBinary no = null;
+                if (i < nodes.ToArray().Length)
+                    no = (NoBinary)nodes[i]; ;
+                matrizTree[depth(no), i] = no;
             }
-            else
-                Console.Write(" ");
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    NoBinary node = matrizTree[i, j];
+
+                    if (node == null)
+                        Console.Write(" ");
+                    else
+                        Console.Write(node.Element());
+
+                    Console.Write("   ");
+                }
+                Console.WriteLine("");
+            }
         }
         #endregion
     }

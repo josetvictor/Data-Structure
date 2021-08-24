@@ -8,15 +8,36 @@ namespace data_structs
     {
         static void Main(string[] args)
         {
-            NoBinary root = new NoBinary(null, 10);
-            SearchBinaryTree searchTree = new SearchBinaryTree(root);
+            //NoBinary root = new NoBinary(null, 10);
+            //SearchBinaryTree searchTree = new SearchBinaryTree(root);
 
-            searchTree.insert(root, 5);
-            searchTree.insert(root, 2);
-            searchTree.insert(root, 8);
-            searchTree.insert(root, 15);
-            searchTree.insert(root, 22);
-            searchTree.insert(root, 25);
+            //searchTree.insert(root, 5);
+            //searchTree.insert(root, 2);
+            //searchTree.insert(root, 8);
+            //searchTree.insert(root, 15);
+            //searchTree.insert(root, 22);
+            //searchTree.insert(root, 25);
+
+            //searchTree.showTree(root);
+
+            //Console.ReadKey();
+
+            //Console.WriteLine("");
+
+            //var removeNode = searchTree.search(root, 5);
+            //searchTree.remove(removeNode);
+
+            //searchTree.showTree(root);
+
+            NoBinary root = new NoBinary(null, 10);
+            TreeAVL searchTree = new TreeAVL(root);
+
+            searchTree.insertAVL(root, 5);
+            searchTree.insertAVL(root, 2);
+            searchTree.insertAVL(root, 8);
+            searchTree.insertAVL(root, 15);
+            searchTree.insertAVL(root, 22);
+            searchTree.insertAVL(root, 25);
 
             searchTree.showTree(root);
 
