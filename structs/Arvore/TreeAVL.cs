@@ -1,5 +1,6 @@
 ﻿using data_structs.Node;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -18,18 +19,44 @@ namespace data_structs.Arvore
 
         public NoBinary rotationSL(NoBinary node)
         {
-            NoBinary aux = node.Left();
-            node.setLeft(aux.Right());
-            aux.setRight(node);
-            return aux;
+            var vovz = node.Parent();
+            var aux = node;
+            node = node.Right();
+            node.setParent(aux.Parent());
+            aux.setParent(node);
+            node.setLeft(aux);
+            aux.setRight(node.Left());
+            node.setParent(vovz);
+
+            if (vovz.Left() == aux)
+                vovz.setLeft(node);
+            else
+                vovz.setRight(node);
+
+            balanceFactor(aux);
+
+            return node;
         }
 
         public NoBinary rotationSR(NoBinary node)
         {
-            NoBinary aux = node.Right();
-            node.setRight(aux.Left());
-            aux.setLeft(node);
-            return aux;
+            var vovz = node.Parent();
+            var aux = node;
+            node = node.Left();
+            node.setParent(aux.Parent());
+            aux.setParent(node);
+            node.setRight(aux);
+            aux.setLeft(node.Right());
+            node.setParent(vovz);
+
+            if (vovz.Left() == aux)
+                vovz.setLeft(node);
+            else
+                vovz.setRight(node);
+
+            balanceFactor(aux);
+
+            return node;
         }
 
         public NoBinary doubleRotationRL(NoBinary node)
@@ -44,17 +71,38 @@ namespace data_structs.Arvore
             return rotationSL(node);
         }
 
-        public int balanceFactor(NoBinary node)
+        public void balanceFactor(NoBinary node)
         {
-            return height(node.Left()) - height(node.Right());
+            node.setBalanceFactor(height(node.Left()) - height(node.Right()));
         }
 
         public void insertAVL(NoBinary node, int value)
         {
             // Percorre a arvore e insere o nó como na BST
-            insert(node, value);
+            if (node != null)
+            {
+                if (value > node.Element())
+                {
+                    if (node.Right() == null)
+                    {
+                        node.setRight(new NoBinary(node, value));
+                        lenght++;
+                    }
+                    else
+                        insert(node.Right(), value);
+                }
+                else
+                {
+                    if (node.Left() == null)
+                    {
+                        node.setLeft(new NoBinary(node, value));
+                        lenght++;
+                    }
+                    else insert(node.Left(), value);
+                }
+            }
             // balanceia a árvore se for necessário
-            passinhoDoVolante(root);
+            passinhoDoVolante(node);
         }
 
         public void removeAVL(int value)
@@ -68,31 +116,40 @@ namespace data_structs.Arvore
         }
 
         public void passinhoDoVolante(NoBinary node) {
-            if (balanceFactor(node) == 2)
+            balanceFactor(node);
+            if (node.BalanceFactor() == 2)
             {
-                int balanceFactorLeft = balanceFactor(node.Left());
-                if (balanceFactorLeft == 0 || balanceFactorLeft == 1)
-                {
-                    rotationSL(node);
-                }
-                if (balanceFactorLeft == -1)
-                {
-                    doubleRotationLR(node.Left());
-                }
-            }
-            if (balanceFactor(node) == -2)
-            {
-                int balanceFactorRight = balanceFactor(node.Right());
-                if (balanceFactorRight == 0 || balanceFactorRight == -1)
+                var Left = node.Left();
+                if (Left.BalanceFactor() == 0 || Left.BalanceFactor() == 1)
                 {
                     rotationSR(node);
                 }
-                if (balanceFactorRight == 1)
+                if (Left.BalanceFactor() == -1)
+                {
+                    doubleRotationLR(Left);
+                }
+            }
+            if (node.BalanceFactor() == -2)
+            {
+                var Right = node.Right();
+                if (Right.BalanceFactor() == 0 || Right.BalanceFactor() == -1)
+                {
+                    rotationSL(node);
+                }
+                if (Right.BalanceFactor() == 1)
                 {
                     doubleRotationRL(node.Right());
                 }
             }
-        }
 
+            if(node == root || node.Parent() == null)
+            {
+                root = node;
+            }
+            else
+            {
+                passinhoDoVolante(node.Parent());
+            } 
+        }
     }
 }

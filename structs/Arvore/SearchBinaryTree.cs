@@ -7,8 +7,8 @@ namespace data_structs.Arvore
 {
     class SearchBinaryTree
     {
-        NoBinary root;
-        int lenght = 0;
+        private NoBinary root;
+        private int lenght = 0;
         public SearchBinaryTree(NoBinary root)
         {
             this.root = root;
@@ -179,7 +179,7 @@ namespace data_structs.Arvore
                     if (node == null)
                         Console.Write(" ");
                     else
-                        Console.Write(node.Element());
+                        Console.Write(node.Element() + "h[" + node.BalanceFactor() + "]");
 
                     Console.Write("   ");
                 }

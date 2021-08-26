@@ -28,6 +28,9 @@ namespace data_structs.Node
             right = null;
         }
 
+        public int BalanceFactor() => balanceFactor;
+        public int setBalanceFactor(int fb) => balanceFactor = fb;
+
         public int Element() => element;
 
         public void setElement(int element) => this.element = element;
