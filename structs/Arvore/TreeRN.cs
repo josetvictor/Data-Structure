@@ -183,8 +183,18 @@ namespace data_structs.Arvore
                     recolorir(node.Parent().Parent().Right());
                 }
                 balanceRubroNegra(node.Parent().Parent());
+                // caso 3
+                if(uncle == null || uncle.Cor() == "N"){
+                    // caso a
+                    if(uncle == node.Parent().Parent().Right()){
+                        node = rotationSR(node);
+                        balanceRubroNegra(node);
+                    } else if(uncle == node.Parent().Parent().Left()){
+                        node = rotationSL(node);
+                        balanceRubroNegra(node);
+                    }
+                }
             }
-            // caso 3
         }
     }
 }

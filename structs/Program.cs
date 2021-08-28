@@ -9,16 +9,16 @@ namespace data_structs
         static void Main(string[] args)
         {
             NoBinary root = new NoBinary(null, 10);
-            TreeAVL searchTree = new TreeAVL(root);
+            TreeRN rn = new TreeRN(root);
 
-            searchTree.insertAVL(root, 5);
-            searchTree.insertAVL(root, 2);
-            searchTree.insertAVL(root, 8);
-            searchTree.insertAVL(root, 15);
-            searchTree.insertAVL(root, 22);
-            searchTree.insertAVL(root, 25);
+            rn.insertRN(root, 5);
+            rn.insertRN(root, 2);
+            rn.insertRN(root, 8);
+            rn.insertRN(root, 15);
+            rn.insertRN(root, 22);
+            rn.insertRN(root, 25);
 
-            searchTree.showTree(root);
+            rn.showTree(root);
 
             Console.ReadKey();
 
