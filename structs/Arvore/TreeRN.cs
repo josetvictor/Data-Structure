@@ -192,5 +192,20 @@ namespace data_structs.Arvore
                 }
             }
         }
+
+        public void removeRN(int value)
+        {
+            // Busca o nó que vai ser deletado
+            var deleted = search(root, value);
+            // Deleta o nó encontrado
+            remove(deleted);
+            // equilibarar arvore rubro negra
+            BalanceRubroNegraAoRemover(deleted);
+        }
+
+        public void BalanceRubroNegraAoRemover(NoRubroNegra node){
+            // se remover um rubro, o sucessor é um negro
+            
+        }
     }
 }
