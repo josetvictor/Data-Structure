@@ -11,6 +11,7 @@ namespace data_structs.Node
         private NoRubroNegra dad;
         private NoRubroNegra left;
         private NoRubroNegra right;
+        private bool isDoubleNegro;
 
         public NoRubroNegra(int element)
         {
@@ -19,6 +20,7 @@ namespace data_structs.Node
             cor = "N";
             left = null;
             right = null;
+            isDoubleNegro = false;
         }
 
         public NoRubroNegra(NoRubroNegra dad, int element)
@@ -28,7 +30,12 @@ namespace data_structs.Node
             Cor - "R";
             left = null;
             right = null;
+            isDoubleNegro = false;
         }
+
+        public bool isDoubleNegro() => this.isDoubleNegro;
+
+        public void setIsDoubleNegro(bool doubleNegro) => isDoubleNegro = doubleNegro;
 
         public string Cor() => Cor;
 

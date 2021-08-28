@@ -176,16 +176,12 @@ namespace data_structs.Arvore
                 if(uncle != null && uncle == "R"){
                     recolorir(node.Parent());
                     recolorir(node.Parent().Parent());
-                    recolorir(node.Parent().Parent().Left());
-                } else if(uncle != null && uncle == "R"){
-                    recolorir(node.Parent());
-                    recolorir(node.Parent().Parent());
-                    recolorir(node.Parent().Parent().Right());
+                    recolorir(uncle);
+                    balanceRubroNegra(node.Parent().Parent());
+                    return;
                 }
-                balanceRubroNegra(node.Parent().Parent());
                 // caso 3
                 if(uncle == null || uncle.Cor() == "N"){
-                    // caso a
                     if(uncle == node.Parent().Parent().Right()){
                         node = rotationSR(node);
                         balanceRubroNegra(node);
