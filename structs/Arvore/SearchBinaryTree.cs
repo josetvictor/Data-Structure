@@ -9,10 +9,17 @@ namespace data_structs.Arvore
     {
         private NoBinary root;
         private int lenght = 0;
+        private NoRubroNegra no;
+
         public SearchBinaryTree(NoBinary root)
         {
             this.root = root;
             lenght++;
+        }
+
+        public SearchBinaryTree(NoRubroNegra no)
+        {
+            this.no = no;
         }
         #region Metodos genericos
         public int size() => lenght;
