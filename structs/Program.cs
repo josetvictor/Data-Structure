@@ -21,15 +21,12 @@ namespace data_structs
             rn.showTreeRN(root);
 
             Console.ReadKey();
-            //NoBinary root = new NoBinary(null, 10);
+            //NoBinary root = new NoBinary(null, 50);
             //TreeAVL searchTree = new TreeAVL(root);
 
-            //searchTree.insertAVL(root, 5);
-            //searchTree.insertAVL(root, 2);
-            //searchTree.insertAVL(root, 8);
-            //searchTree.insertAVL(root, 15);
-            //searchTree.insertAVL(root, 22);
-            //searchTree.insertAVL(root, 25);
+            //searchTree.insertAVL(root, 20);
+            //searchTree.insertAVL(root, 100);
+            //searchTree.insertAVL(root, 80);
 
             //searchTree.showTree(root);
 
@@ -37,7 +34,7 @@ namespace data_structs
 
             //Console.WriteLine("");
 
-            //var removeNode = searchTree.search(root, 5);
+            //var removeNode = searchTree.search(root, 20);
             //searchTree.remove(removeNode);
 
             //searchTree.showTree(root);

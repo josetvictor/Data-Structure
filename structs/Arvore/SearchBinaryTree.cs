@@ -160,10 +160,10 @@ namespace data_structs.Arvore
 
         public void showTree(NoBinary tree)
         {
-            int rows = height(tree);
+            int rows = height(tree) +1;
             int columns = lenght;
 
-            NoBinary[,] matrizTree = new NoBinary[rows + 1, columns];
+            NoBinary[,] matrizTree = new NoBinary[rows, columns];
             ArrayList nodes = new ArrayList();
 
             nodes = tree.nodeElements(nodes, tree);
