@@ -8,31 +8,38 @@ namespace data_structs
     {
         static void Main(string[] args)
         {
-            NoRubroNegra root = new NoRubroNegra(20);
-            TreeRN rn = new TreeRN(root);
+            //NoRubroNegra root = new NoRubroNegra(20);
+            //TreeRN rn = new TreeRN(root);
 
-            rn.insert(root, 10);
-            rn.insert(root, 30);
-            rn.insert(root, 33);
-            rn.insert(root, 32);
-            rn.insert(root, 34);
-            rn.insert(root, 35);
+            //rn.insert(root, 10);
+            //rn.insert(root, 30);
+            //rn.insert(root, 33);
 
-            rn.showTreeRN(root);
+            //rn.showTreeRN(root);
 
-            Console.ReadKey();
-            //NoBinary root = new NoBinary(null, 50);
-            //TreeAVL searchTree = new TreeAVL(root);
-
-            //searchTree.insertAVL(root, 20);
-            //searchTree.insertAVL(root, 100);
-            //searchTree.insertAVL(root, 80);
-
-            //searchTree.showTree(root);
+            //Console.WriteLine(rn.isRN(root));
 
             //Console.ReadKey();
+            NoBinary root = new NoBinary(null, 50);
+            NoBinary rootb = new NoBinary(null, 50);
+            TreeAVL searchTree = new TreeAVL(root);
+            TreeAVL searchTreeB = new TreeAVL(root);
 
-            //Console.WriteLine("");
+            searchTree.insertAVL(root, 20);
+            searchTree.insertAVL(root, 100);
+            searchTree.insertAVL(root, 80);
+
+            searchTreeB.insertAVL(rootb, 20);
+            searchTreeB.insertAVL(rootb, 100);
+            searchTreeB.insertAVL(rootb, 81);
+
+            searchTree.showTree(root);
+
+            Console.WriteLine(searchTree.compAVL(searchTree, searchTreeB));
+
+            Console.ReadKey();
+
+            Console.WriteLine("");
 
             //var removeNode = searchTree.search(root, 20);
             //searchTree.remove(removeNode);

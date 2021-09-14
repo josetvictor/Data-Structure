@@ -164,7 +164,7 @@ namespace data_structs.Arvore
             int columns = lenght;
 
             NoBinary[,] matrizTree = new NoBinary[rows, columns];
-            ArrayList nodes = new ArrayList();
+            List< NoBinary> nodes = new List<NoBinary>();
 
             nodes = tree.nodeElements(nodes, tree);
 
@@ -173,7 +173,7 @@ namespace data_structs.Arvore
             {
                 NoBinary no = null;
                 if (i < nodes.ToArray().Length)
-                    no = (NoBinary)nodes[i]; ;
+                    no = nodes[i]; ;
                 matrizTree[depth(no), i] = no;
             }
 

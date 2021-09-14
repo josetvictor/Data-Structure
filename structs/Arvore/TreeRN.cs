@@ -17,6 +17,56 @@ namespace data_structs.Arvore
             lenght = 1;
         }
 
+        public int blackHeight(NoRubroNegra node)
+        {
+            int height = 0;
+            if(node != null)
+            {
+                if(node.Cor() == "N")
+                {
+                    height = 1 + Math.Max(blackHeight(node.Left()), blackHeight(node.Right()));
+                } else
+                {
+                    height = Math.Max(blackHeight(node.Left()), blackHeight(node.Right()));
+                }
+            }
+            return height;
+        }
+
+        public bool isRN(NoRubroNegra tree)
+        {
+
+            if(blackHeight(tree.Left()) != blackHeight(tree.Right()))
+            {
+                return false;
+            }
+
+            if (isRoot(tree) && tree.Cor() != "N")
+            {
+                return false;
+            }
+
+            ArrayList nodes = new ArrayList();
+            nodes = tree.nodeElements(nodes, tree);
+
+            foreach(NoRubroNegra node in nodes)
+            {
+                if(node.Left() != null && node.Right() != null)
+                {
+                    if (node.Cor() == "R" && (node.Left().Cor() != "N" || node.Right().Cor() != "N"))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        public bool isExternal(NoRubroNegra node) => node.Left() == null && node.Right() == null;
+
+        public bool isRoot(NoRubroNegra node) => node == root;
+
         public void recolorir(NoRubroNegra node)
         {
             if (node == root && node.Parent() == null)

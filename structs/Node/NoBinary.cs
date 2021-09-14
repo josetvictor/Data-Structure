@@ -6,7 +6,7 @@ namespace data_structs.Node
 {
     public class NoBinary
     {
-        private int element;
+        int element;
         private int balanceFactor;
         private NoBinary dad;
         private NoBinary left;
@@ -70,7 +70,7 @@ namespace data_structs.Node
             yield return list.ToArray().GetEnumerator();
         }
 
-        public ArrayList nodeElements(ArrayList nodes, NoBinary no)
+        public List<NoBinary> nodeElements(List<NoBinary> nodes, NoBinary no)
         {
             NoBinary leftSon = no.left;
             NoBinary rightSon = no.right;

@@ -105,6 +105,35 @@ namespace data_structs.Arvore
             passinhoDoVolante(node);
         }
 
+        public bool compAVL(TreeAVL A, TreeAVL B)
+        {
+            List<NoBinary> arvoreA = new List<NoBinary>();
+            List<NoBinary> arvoreB = new List<NoBinary>();
+
+            arvoreA = A.root.nodeElements(arvoreA, A.root);
+            arvoreB = B.root.nodeElements(arvoreB, B.root);
+            
+            arvoreA.ToArray();
+            arvoreB.ToArray();
+
+            if (arvoreA.Count != arvoreB.Count)
+            {
+                return false;
+            } else
+            {
+                for (int i = 0; i < arvoreA.Count; i++)
+                {
+
+                    if (arvoreA[i].Element() != arvoreB[i].Element())
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
         public void removeAVL(int value)
         {
             // Busca o nó que vai ser deletado
